@@ -12,6 +12,7 @@
     "test:ci": "npm test -- --coverage"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.1",
     "@types/jest": "^26.0.0",
     "@types/node": "^14.0.13",
     "@types/validator": "^13.0.0",
