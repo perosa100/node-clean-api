@@ -1,5 +1,5 @@
 import { EmailValidaton } from './../../presentation/helpers/validators/email-validation'
-import { CompareFieldValidation } from './../../presentation/helpers/validators/compare-field-validation copy'
+import { CompareFieldValidation } from '../../presentation/helpers/validators/compare-field-validation'
 import { ValidationCompose } from './../../presentation/helpers/validators/validation-compose'
 import { makeSignUpValidation } from './signup-validation'
 import { RequiredFieldValidation } from '../../presentation/helpers/validators/required-field-validation'
