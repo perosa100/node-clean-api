@@ -16,14 +16,12 @@ const makeFakeRequest = (): HttpRequest => ({
   body: {
     email: 'any_email@mail.com',
     password: 'any_password'
-
   }
 })
 interface SutTypes {
   sut: LoginController
   authenticationStub: Authentication
   validationStub: Validation
-
 }
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
@@ -36,7 +34,7 @@ const makeValidation = (): Validation => {
 const makeSut = (): SutTypes => {
   const validationStub = makeValidation()
   const authenticationStub = makeAuthentication()
-  const sut = new LoginController(validationStub, authenticationStub)
+  const sut = new LoginController(authenticationStub, validationStub)
   return {
     sut,
     validationStub,
