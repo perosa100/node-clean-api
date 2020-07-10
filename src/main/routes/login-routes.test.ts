@@ -29,7 +29,7 @@ describe('Login routes', () => {
           password: '1234',
           passwordConfirmation: '1234'
         })
-        .expect(500)
+        .expect(200)
     })
   })
   describe('Post/  login', () => {
