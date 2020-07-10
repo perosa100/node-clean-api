@@ -11,6 +11,8 @@ export class LoginController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
+      console.error(error, 'errorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerrorerror')
+
       if (error) {
         return badRequest(error)
       }
