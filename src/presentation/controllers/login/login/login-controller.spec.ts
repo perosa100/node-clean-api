@@ -1,7 +1,7 @@
-import { AuthenticationModel } from '../../../domain/usecases/authentication'
+import { AuthenticationModel } from '../../../../domain/usecases/authentication'
 import { LoginController } from './login-controller'
-import { badRequest, serverError, unauthorized, ok } from '../../helpers/http/http-helper'
-import { MissingParamError } from '../../errors'
+import { badRequest, serverError, unauthorized, ok } from '../../../helpers/http/http-helper'
+import { MissingParamError } from '../../../errors'
 import { Authentication, HttpRequest, Validation } from './login-controller-protocols'
 
 const makeAuthentication = (): Authentication => {
