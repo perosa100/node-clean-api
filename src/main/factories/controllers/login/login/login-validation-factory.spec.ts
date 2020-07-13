@@ -1,8 +1,8 @@
-import { ValidationCompose, EmailValidaton, RequiredFieldValidation } from '../../../../validation/validators'
+import { ValidationCompose, EmailValidaton, RequiredFieldValidation } from '../../../../../validation/validators'
 import { makeLoginValidation } from './login-validation-factory'
-import { Validation } from './../../../../presentation/protocols/validation'
-import { EmailValidator } from '../../../../validation/protocols/email-validator'
-jest.mock('../../../../validation/validators/validation-compose')
+import { Validation } from '../../../../../presentation/protocols/validation'
+import { EmailValidator } from '../../../../../validation/protocols/email-validator'
+jest.mock('../../../../../validation/validators/validation-compose')
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {

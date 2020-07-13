@@ -1,5 +1,5 @@
-import { ValidationCompose, RequiredFieldValidation } from '../../../../validation/validators'
-import { Validation } from '../../../../presentation/protocols/validation'
+import { ValidationCompose, RequiredFieldValidation } from '../../../../../validation/validators'
+import { Validation } from '../../../../../presentation/protocols/validation'
 
 export const makeAddSurveyValidation = (): ValidationCompose => {
   const validations: Validation[] = []
