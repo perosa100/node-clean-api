@@ -45,7 +45,7 @@ describe('Auth Middleware', () => {
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()))
   })
 
-  test('Should call LoadAccountByTojen if correct acessToken', async () => {
+  test('Should call LoadAccountByToken if correct accessToken', async () => {
     const role = 'any_role'
     const { sut, loadAccountByTokenStub } = makeSut(role)
     const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
