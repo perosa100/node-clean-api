@@ -1,6 +1,7 @@
-import { ValidationCompose } from './validation-compose'
+import { ValidationComposite } from './validation-composite'
 import { MissingParamError } from '../../presentation/errors'
 import { Validation } from '../../presentation/protocols'
+
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
     validate (input: any): Error {
@@ -9,13 +10,18 @@ const makeValidation = (): Validation => {
   }
   return new ValidationStub()
 }
+
 interface SutTypes {
-  sut: ValidationCompose
+  sut: ValidationComposite
   validationStubs: Validation[]
 }
+
 const makeSut = (): SutTypes => {
-  const validationStubs = [makeValidation(), makeValidation()]
-  const sut = new ValidationCompose(validationStubs)
+  const validationStubs = [
+    makeValidation(),
+    makeValidation()
+  ]
+  const sut = new ValidationComposite(validationStubs)
   return {
     sut,
     validationStubs

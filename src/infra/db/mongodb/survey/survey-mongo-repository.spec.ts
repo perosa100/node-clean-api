@@ -1,9 +1,10 @@
-import { Collection } from 'mongodb'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
+import { Collection } from 'mongodb'
 
 let surveyCollection: Collection
-describe('Account Mongo Repository', () => {
+
+describe('Survey Mongo Repository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -20,7 +21,8 @@ describe('Account Mongo Repository', () => {
   const makeSut = (): SurveyMongoRepository => {
     return new SurveyMongoRepository()
   }
-  test('Should add an survey on  success', async () => {
+
+  test('Should add a survey on success', async () => {
     const sut = makeSut()
     await sut.add({
       question: 'any_question',
@@ -31,9 +33,7 @@ describe('Account Mongo Repository', () => {
         answer: 'other_answer'
       }]
     })
-    const survey = await surveyCollection.findOne({
-      question: 'any_question'
-    })
+    const survey = await surveyCollection.findOne({ question: 'any_question' })
     expect(survey).toBeTruthy()
   })
 })

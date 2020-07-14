@@ -6,7 +6,7 @@ import { hash } from 'bcrypt'
 
 let accountCollection: Collection
 
-describe('Login routes', () => {
+describe('Login Routes', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -19,31 +19,42 @@ describe('Login routes', () => {
     accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
-  describe('Post/  signup', () => {
-    test('Should return an account on signup', async () => {
+
+  describe('POST /signup', () => {
+    test('Should return 200 on signup', async () => {
       await request(app)
         .post('/api/signup')
         .send({
-          name: 'pp11',
-          email: 'pp_11@gmail.com',
-          password: '1234',
-          passwordConfirmation: '1234'
+          name: 'Rodrigo',
+          email: 'rodrigo.manguinho@gmail.com',
+          password: '123',
+          passwordConfirmation: '123'
         })
         .expect(200)
+      await request(app)
+        .post('/api/signup')
+        .send({
+          name: 'Rodrigo',
+          email: 'rodrigo.manguinho@gmail.com',
+          password: '123',
+          passwordConfirmation: '123'
+        })
+        .expect(403)
     })
   })
-  describe('Post/  login', () => {
+
+  describe('POST /login', () => {
     test('Should return 200 on login', async () => {
       const password = await hash('123', 12)
       await accountCollection.insertOne({
-        name: 'pp',
-        email: 'pp_pp@gmail.com',
+        name: 'Rodrigo',
+        email: 'rodrigo.manguinho@gmail.com',
         password
       })
       await request(app)
         .post('/api/login')
         .send({
-          email: 'pp_pp@gmail.com',
+          email: 'rodrigo.manguinho@gmail.com',
           password: '123'
         })
         .expect(200)
@@ -53,7 +64,7 @@ describe('Login routes', () => {
       await request(app)
         .post('/api/login')
         .send({
-          email: 'pp_pp@gmail.com',
+          email: 'rodrigo.manguinho@gmail.com',
           password: '123'
         })
         .expect(401)

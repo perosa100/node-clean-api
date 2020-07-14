@@ -21,15 +21,11 @@ export const MongoHelper = {
     if (!this.client?.isConnected()) {
       await this.connect(this.uri)
     }
-
     return this.client.db().collection(name)
   },
-  map: (collection: any): any => {
-    //  console.log('account', account)
-    const { _id, ...collectionWithoutId } = collection
-    //  console.log('accountWithoutId', Object.assign({}, accountWithoutId, { id: _id }))
 
+  map: (collection: any): any => {
+    const { _id, ...collectionWithoutId } = collection
     return Object.assign({}, collectionWithoutId, { id: _id })
   }
-
 }

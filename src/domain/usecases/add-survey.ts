@@ -1,4 +1,3 @@
-
 export interface AddSurveyModel {
   question: string
   answers: SurveyAnswer[]
@@ -10,5 +9,5 @@ export interface SurveyAnswer {
 }
 
 export interface AddSurvey {
-  add(data: AddSurveyModel): Promise<void>
+  add (data: AddSurveyModel): Promise<void>
 }

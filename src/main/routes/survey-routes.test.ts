@@ -8,7 +8,7 @@ import env from '../config/env'
 let surveyCollection: Collection
 let accountCollection: Collection
 
-describe('Survey routes', () => {
+describe('Survey Routes', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -23,7 +23,8 @@ describe('Survey routes', () => {
     accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
-  describe('Post/  Survey', () => {
+
+  describe('POST /surveys', () => {
     test('Should return 403 on add survey without accessToken', async () => {
       await request(app)
         .post('/api/surveys')
@@ -32,20 +33,18 @@ describe('Survey routes', () => {
           answers: [{
             answer: 'Answer 1',
             image: 'http://image-name.com'
-          },
-          {
+          }, {
             answer: 'Answer 2'
-          }
-          ]
+          }]
         })
         .expect(403)
     })
 
     test('Should return 204 on add survey with valid accessToken', async () => {
       const res = await accountCollection.insertOne({
-        name: 'pppp',
-        email: 'pppp_pp@gmail.com',
-        password: '1235',
+        name: 'Rodrigo',
+        email: 'rodrigo.manguinho@gmail.com',
+        password: '123',
         role: 'admin'
       })
       const id = res.ops[0]._id
@@ -57,7 +56,6 @@ describe('Survey routes', () => {
           accessToken
         }
       })
-
       await request(app)
         .post('/api/surveys')
         .set('x-access-token', accessToken)
@@ -70,7 +68,7 @@ describe('Survey routes', () => {
             answer: 'Answer 2'
           }]
         })
-        .expect(403)
+        .expect(204)
     })
   })
 })
