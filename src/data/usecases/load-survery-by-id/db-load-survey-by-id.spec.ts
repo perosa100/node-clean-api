@@ -22,7 +22,7 @@ type SutTypes ={
 
 const makeLoadSurveyByIdRepository = (): LoadSurveyByIdRepository => {
   class LoadSurveyByIdRepositoryStub implements LoadSurveyByIdRepository {
-    async loadByID (id: string): Promise<SurveyModel> {
+    async loadById (id: string): Promise<SurveyModel> {
       return new Promise(resolve => resolve(makeFakeSurvey()))
     }
   }
@@ -48,7 +48,7 @@ describe('DbLoadSurveyByID', () => {
 
   test('Should call LoadSurveyByIdRepository', async () => {
     const { sut, loadSurveyByIdRepositoryStub } = makeSut()
-    const loadAByIdSpy = jest.spyOn(loadSurveyByIdRepositoryStub, 'loadByID')
+    const loadAByIdSpy = jest.spyOn(loadSurveyByIdRepositoryStub, 'loadById')
     await sut.loadById('any_id')
     expect(loadAByIdSpy).toHaveBeenCalledWith('any_id')
   })
@@ -57,5 +57,12 @@ describe('DbLoadSurveyByID', () => {
     const { sut } = makeSut()
     const survey = await sut.loadById('any_id')
     expect(survey).toEqual(makeFakeSurvey())
+  })
+
+  test('Should throw if LoadSurveyByIdRepository throws', async () => {
+    const { sut, loadSurveyByIdRepositoryStub } = makeSut()
+    jest.spyOn(loadSurveyByIdRepositoryStub, 'loadById').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.loadById('any_id')
+    await expect(promise).rejects.toThrow()
   })
 })
