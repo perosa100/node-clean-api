@@ -2,9 +2,8 @@
   "name": "clean-node-api",
   "version": "2.0.2",
   "description": "NodeJs Rest API using TDD, Clean Architecture and Typescript",
-  "author": "Rodrigo Manguinho",
+  "author": "Patrick Perosa",
   "license": "ISC",
-  "repository": "github:rmanguinho/clean-ts-api",
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
