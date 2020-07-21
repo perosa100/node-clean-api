@@ -1,9 +1,9 @@
-import request from 'supertest'
-import app from '../config/app'
+import app from '@/main/config/app'
+import env from '@/main/config/env'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
-import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
-import env from '../config/env'
+import { Collection } from 'mongodb'
+import request from 'supertest'
 
 let surveyCollection: Collection
 let accountCollection: Collection
@@ -43,7 +43,7 @@ describe('Survey Routes', () => {
   })
 
   describe('PUT /surveys/:surveyId/results', () => {
-    test('Should return 403 on save survey results without accessToken', async () => {
+    test('Should return 403 on save survey result without accessToken', async () => {
       await request(app)
         .put('/api/surveys/any_id/results')
         .send({
@@ -64,7 +64,6 @@ describe('Survey Routes', () => {
         }],
         date: new Date()
       })
-
       await request(app)
         .put(`/api/surveys/${res.ops[0]._id}/results`)
         .set('x-access-token', accessToken)

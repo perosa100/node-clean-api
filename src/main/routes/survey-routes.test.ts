@@ -1,9 +1,9 @@
-import request from 'supertest'
-import app from '../config/app'
+import app from '@/main/config/app'
+import env from '@/main/config/env'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
-import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
-import env from '../config/env'
+import { Collection } from 'mongodb'
+import request from 'supertest'
 
 let surveyCollection: Collection
 let accountCollection: Collection
@@ -78,12 +78,13 @@ describe('Survey Routes', () => {
   })
 
   describe('GET /surveys', () => {
-    test('Should return 403 on load surveys survey without accessToken', async () => {
+    test('Should return 403 on load surveys without accessToken', async () => {
       await request(app)
         .get('/api/surveys')
         .expect(403)
     })
-    test('Should return 204 on load surveys surveys with valid accessToken', async () => {
+
+    test('Should return 204 on load surveys with valid accessToken', async () => {
       const accessToken = await makeAccessToken()
       await request(app)
         .get('/api/surveys')

@@ -1,5 +1,5 @@
-import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
+import { MongoHelper } from '../helpers/mongo-helper'
 import { Collection } from 'mongodb'
 
 let surveyCollection: Collection
@@ -7,6 +7,7 @@ let surveyCollection: Collection
 const makeSut = (): SurveyMongoRepository => {
   return new SurveyMongoRepository()
 }
+
 describe('Survey Mongo Repository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
@@ -40,7 +41,7 @@ describe('Survey Mongo Repository', () => {
   })
 
   describe('loadAll()', () => {
-    test('Should loadAll a surveys on success', async () => {
+    test('Should load all surveys on success', async () => {
       await surveyCollection.insertMany([{
         question: 'any_question',
         answers: [{
@@ -59,11 +60,12 @@ describe('Survey Mongo Repository', () => {
       const sut = makeSut()
       const surveys = await sut.loadAll()
       expect(surveys.length).toBe(2)
+      expect(surveys[0].id).toBeTruthy()
       expect(surveys[0].question).toBe('any_question')
       expect(surveys[1].question).toBe('other_question')
     })
 
-    test('Should loadAll empty list', async () => {
+    test('Should load empty list', async () => {
       const sut = makeSut()
       const surveys = await sut.loadAll()
       expect(surveys.length).toBe(0)
@@ -83,6 +85,7 @@ describe('Survey Mongo Repository', () => {
       const sut = makeSut()
       const survey = await sut.loadById(res.ops[0]._id)
       expect(survey).toBeTruthy()
+      expect(survey.id).toBeTruthy()
     })
   })
 })

@@ -1,4 +1,3 @@
-
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { Collection } from 'mongodb'
@@ -65,13 +64,12 @@ describe('Survey Mongo Repository', () => {
         answer: survey.answers[0].answer,
         date: new Date()
       })
-
       expect(surveyResult).toBeTruthy()
       expect(surveyResult.id).toBeTruthy()
       expect(surveyResult.answer).toBe(survey.answers[0].answer)
     })
 
-    test('Should add a survey result if its not new', async () => {
+    test('Should update survey result if its not new', async () => {
       const survey = await makeSurvey()
       const account = await makeAccount()
       const res = await surveyResultCollection.insertOne({
